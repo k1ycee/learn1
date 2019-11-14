@@ -3,41 +3,50 @@ package com.example.learn1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var die: ImageView
+    lateinit var die2: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val roll: Button = findViewById(R.id.roll)
-
-        val rise: Button = findViewById(R.id.up)
-        roll.setOnClickListener{rolldice()}
-        rise.setOnClickListener{incr()}
-
-
+        val reset: Button = findViewById(R.id.res)
+        roll.setOnClickListener { roller() }
+        reset.setOnClickListener{change()}
+        die = findViewById(R.id.die)
+        die2 = findViewById(R.id.die2)
+        // rise.setOnClickListener{incr()}
     }
 
-    private fun rolldice(){
-        val die: TextView = findViewById(R.id.die)
+    private fun roller() {
+        die.setImageResource(rolldice())
+        die2.setImageResource(rolldice())
+    }
+    private fun change(){
+        die.setImageResource(R.drawable.empty_dice)
+        die2.setImageResource(R.drawable.empty_dice)
+    }
+
+    private fun rolldice(): Int {
         val randomInt = Random.nextInt(6) + 1
-        die.text = randomInt.toString()
-      //  Toast.makeText(this, "Rollers!", Toast.LENGTH_LONG).show()
+        return when (randomInt) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
 
-    }
-    private fun incr(){
-        val die: TextView = findViewById(R.id.die)
-
-        var up = die.text.toString().toInt()
-        if (up < 6){
-            up++
-
-            die.text = up.toString()
         }
+
 
     }
 }
+

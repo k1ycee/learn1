@@ -6,16 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
         android:id="@+id/die"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/num"
-        android:textSize="50sp"
+        android:layout_width="137dp"
+        android:layout_height="184dp"
+        android:src="@drawable/empty_dice"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499"
+        tools:src="@drawable/dice_1" />
 
     <Button
         android:id="@+id/roll"
@@ -29,14 +31,24 @@
         app:layout_constraintTop_toBottomOf="@+id/die" />
 
     <Button
-        android:id="@+id/up"
+        android:id="@+id/res"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Increase"
+        android:text="Reset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roll" />
+
+    <ImageView
+        android:id="@+id/die2"
+        android:layout_width="137dp"
+        android:layout_height="184dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/die"
+        app:layout_constraintTop_toTopOf="@+id/die"
+        app:srcCompat="@drawable/empty_dice"
+        tools:src="@drawable/dice_1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
