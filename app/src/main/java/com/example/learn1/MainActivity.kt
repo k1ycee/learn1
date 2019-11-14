@@ -1,48 +1,53 @@
 package com.example.learn1
 
 import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.*
-import androidx.core.content.getSystemService
-import kotlin.random.Random
+import android.widget.Button
+import android.widget.TextView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.gical).setOnClickListener{doit(it)}
-        findViewById<TextView>(R.id.name_text).setOnClickListener{revdoit(it)}
 
-
-
+        listener()
     }
+// This is to choose the colors for the different texts
+    private fun colored(view : View){
+        when (view.id){
+            R.id.textone -> view.setBackgroundColor(Color.BLACK)
+            R.id.texttwo -> view.setBackgroundColor(Color.DKGRAY)
+            R.id.textthree -> view.setBackgroundColor(Color.GREEN)
+            R.id.textfour -> view.setBackgroundColor(Color.MAGENTA)
+            R.id.textfive -> view.setBackgroundColor(Color.YELLOW)
+            R.id.bluebtn -> view.setBackgroundColor(Color.BLUE)
+            R.id.cyanbtn -> view.setBackgroundColor(Color.CYAN)
+            R.id.greenbtn -> view.setBackgroundColor(Color.GREEN)
+            else -> view.setBackgroundColor(Color.LTGRAY)
 
-    private fun doit(view: View){
-        val nam = findViewById<EditText>(R.id.chgnm)
-        val cge = findViewById<TextView>(R.id.name_text)
-        cge.text = nam.text
-        view.visibility = View.GONE
-        nam.visibility = View.GONE
-        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken,0)
+        }
     }
+// This is to set the colors when the user selects a particular text view
+    private fun listener(){
+        val text1 = findViewById<TextView>(R.id.textone)
+        val text2 = findViewById<TextView>(R.id.texttwo)
+        val text3 = findViewById<TextView>(R.id.textthree)
+        val text4 = findViewById<TextView>(R.id.textfour)
+        val text5 = findViewById<TextView>(R.id.textfive)
+        val root = findViewById<View>(R.id.constrain)
+        val bck1 = findViewById<Button>(R.id.bluebtn)
+        val bckgr = findViewById<Button>(R.id.greenbtn)
+        val bck3 =  findViewById<Button>(R.id.cyanbtn)
 
-    private fun revdoit (view: View){
-        val gic = findViewById<Button>(R.id.gical)
-        val nam = findViewById<EditText>(R.id.chgnm)
-        val cge = findViewById<TextView>(R.id.name_text)
-        cge.requestFocus()
-        val hian = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        hian.hideSoftInputFromWindow(view.windowToken, 0)
-        view.visibility = View.GONE
-        gic.visibility = View.VISIBLE
-        nam.visibility = View.VISIBLE
-
-
+        val clickable: List<View> =
+            listOf(text1,text2,text3,text4,text5,root,bck1,bckgr,bck3)
+        for (item in clickable){
+            item.setOnClickListener { colored(it) }
+        }
     }
 }
 
