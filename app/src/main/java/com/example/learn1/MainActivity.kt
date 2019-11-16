@@ -4,26 +4,33 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputBinding
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.content.getSystemService
+import androidx.databinding.DataBindingUtil
+import com.example.learn1.databinding.ActivityMainBinding
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+    private val nom: meNom = meNom("Anon")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.gical).setOnClickListener{doit(it)}
-        findViewById<TextView>(R.id.name_text).setOnClickListener{revdoit(it)}
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.meNom = nom
+        binding.gical.setOnClickListener{doit(it)}
+        binding.nameText.setOnClickListener{revdoit(it)}
 
 
 
     }
 
     private fun doit(view: View){
-        val nam = findViewById<EditText>(R.id.chgnm)
-        val cge = findViewById<TextView>(R.id.name_text)
+        val nam = binding.chgnm
+        val cge = binding.nameText
         cge.text = nam.text
         view.visibility = View.GONE
         nam.visibility = View.GONE
@@ -32,9 +39,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun revdoit (view: View){
-        val gic = findViewById<Button>(R.id.gical)
-        val nam = findViewById<EditText>(R.id.chgnm)
-        val cge = findViewById<TextView>(R.id.name_text)
+        val gic = binding.gical
+        val nam = binding.chgnm
+        val cge = binding.nameText
         cge.requestFocus()
         val hian = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         hian.hideSoftInputFromWindow(view.windowToken, 0)
